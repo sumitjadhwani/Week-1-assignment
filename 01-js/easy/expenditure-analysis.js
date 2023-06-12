@@ -9,7 +9,29 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  var total_amount_spent = {};
+
+  // Calucate the total spent amounts per category
+  for(var i in transactions) {
+    var category = transactions[i].category;
+
+    if(total_amount_spent.hasOwnProperty(category)){
+      total_amount_spent[category] = total_amount_spent[category] + transactions[i].price;
+    }
+    else{
+      total_amount_spent[category] = transactions[i].price;
+    }
+  }
+
+  // Convert the accumulated amounts into the desired output format
+   var result = [];
+   for(var category in total_amount_spent) {
+     var obj = {};
+     obj[category] = total_amount_spent[category];
+     result.push(obj);
+   }
+  
+  return result;
 }
 
 module.exports = calculateTotalSpentByCategory;
